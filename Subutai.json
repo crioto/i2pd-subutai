@@ -1,0 +1,54 @@
+{
+    "name": "${envName}",
+    "description": "Subutai Blueprint for I2P network router: i2pd",
+    "version": "1.0.0",
+    "author": "https://github.com/crioto",
+    "containers": [ {
+        "hostname": "${webContainerName}",
+        "template": "debian-stretch",
+        "peer-criteria": "HTTP-GROUP",
+        "size": "SMALL",
+        "port-mapping": [
+          {
+            "protocol": "tcp",
+            "domain": "${envName}.envs.subutai.cloud",
+            "internal-port": "8080",
+            "external-port": "8080"
+          }
+        ]
+      }
+    ],
+    "ansible-configuration": {
+      "source-url": "https://github.com/crioto/i2pd-subutai/archive/master.zip",
+      "ansible-playbook": "playbook.yml",
+      "groups": [
+          {
+              "name": "i2pd",
+              "hostnames": [
+                  "${webContainerName}"
+              ]
+          }
+      ]
+    },
+    "user-variables": {
+      "envName": {
+          "description": "Enter name of the environment",
+          "type": "string",
+          "default": "domain",
+          "validation": "[a-zA-Z0-9]+"
+      },
+      "webContainerName": {
+          "description": "Enter the container's hostname",
+          "type": "string",
+          "default": "hostname",
+          "validation": "[a-zA-Z0-9]+"
+      }
+    },
+    "peer-criteria": [ 
+      {
+        "name": "HTTP-GROUP",
+        "max-price": "25"
+      }
+    ]
+  }
+  
