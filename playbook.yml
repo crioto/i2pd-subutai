@@ -8,6 +8,11 @@
       update_cache: true
       allow_unauthenticated: true
       upgrade: true
+
+  - name: Adding APT key
+    apt_key:
+      keyserver: keys.gnupg.net
+      id: 66F6C87B98EBCFE2
   
   - name: Installing HTTPS transport for APT
     apt:
