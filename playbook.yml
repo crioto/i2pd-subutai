@@ -8,6 +8,11 @@
       update_cache: true
       allow_unauthenticated: true
       upgrade: true
+  
+  - name: Installing HTTPS transport for APT
+    apt:
+      name: apt-transport-https
+      state: present
       
   - name: Setup ntp package
     apt: 
